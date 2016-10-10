@@ -1,7 +1,6 @@
 <%# add navigation links to this file %>
 <ul class="nav navbar-nav navbar-right">
     <li><a href="#">Settings</a></li>
-    <li><a href="#">Profile</a></li>
     <li> <%= link_to "Profile",edit_user_registration_path, method: :get   %> </li>
     <li><a href="#">Help</a></li>
     <% if user_signed_in? %>
