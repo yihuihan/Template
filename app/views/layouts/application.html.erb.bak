@@ -9,12 +9,12 @@
     <%= csrf_meta_tags %>
   </head>
   <body>
-    <%= render 'layouts/navigation' %>
-
-    <div class="container-fluid">
-      <div class="row">
-        <%= yield %>
-      </div>
-    </div>
+    <header>
+      <%= render 'layouts/navigation' %>
+    </header>
+    <main role="main">
+       <%= render 'layouts/messages' %>
+       <%= yield %>
+    </main>
   </body>
 </html>
