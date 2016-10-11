@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161010090937) do
+ActiveRecord::Schema.define(version: 20161011065027) do
 
   create_table "books", force: :cascade do |t|
     t.text     "title"
@@ -24,6 +24,19 @@ ActiveRecord::Schema.define(version: 20161010090937) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "permissions", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "entity",       default: "f"
+    t.boolean  "read_perm",    default: false
+    t.boolean  "create_perm",  default: false
+    t.boolean  "update_perm",  default: false
+    t.boolean  "destroy_perm", default: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+  end
+
+  add_index "permissions", ["user_id"], name: "index_permissions_on_user_id"
 
   create_table "songs", force: :cascade do |t|
     t.text     "title"
