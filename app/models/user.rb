@@ -30,13 +30,13 @@ class User < ActiveRecord::Base
     p.save
   end 
 
-  def has_permission?(entity, permission)
-    entity_perm=self.permission.where(entity: entity).first
-    if  entity_perm!=nil && entity_perm.attributes.keys.include?(permission)
-      return entity_perm.send(permission)
-    end 
+  # def has_permission?(entity, permission)
+  #   entity_perm=self.permission.where(entity: entity).first
+  #   if  entity_perm!=nil && entity_perm.attributes.keys.include?(permission)
+  #     return entity_perm.send(permission)
+  #   end 
 
-    return false
-  end
+  #   return false
+  # end
   
 end

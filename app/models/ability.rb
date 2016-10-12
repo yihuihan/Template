@@ -28,5 +28,23 @@ class Ability
     #
     # See the wiki for details:
     # https://github.com/CanCanCommunity/cancancan/wiki/Defining-Abilities
+
+    user ||= User.new
+    if user.is_admin
+      can :manage, User
+    else
+      assign_ability(user)
+    end
+  end
+
+private
+
+  def assign_ability(user)
+      # byebug
+      user.permission.each do |p|
+        action_list = p.attributes.keys.select {|key| key[-5..-1]=="_perm" && p.send(key)}.map{|key| key[0...-5].to_sym}
+        target=Object.const_get(p.entity.classify)
+        can action_list, target
+      end
   end
 end
