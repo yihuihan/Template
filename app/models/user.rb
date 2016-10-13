@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   has_many :permission
 
   def permissions_of(entity)
-    byebug
+    # byebug
     p=self.permission.where(entity: entity).first
     if p==nil 
       return []

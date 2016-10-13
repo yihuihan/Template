@@ -61,7 +61,7 @@ Rails.application.routes.draw do
   #     resources :products
   #   end
 
-  resources :permission, only: :index :update
+  resources :permission, only: [:index, :update] 
 
   root to: 'statuses#index'
 end
