@@ -6,13 +6,19 @@ class User < ActiveRecord::Base
 
   has_many :permission
 
+  
+
   def permissions_of(entity)
     # byebug
     p=self.permission.where(entity: entity).first
     if p==nil 
       return []
     else
-      return p.attributes.keys.select {|key| key[-5..-1]=="_perm" && p.send(key)}
+      # byebug
+      perm_list= p.attributes.keys.select {|key| key[-5..-1]=="_perm" && p.send(key)}
+      perm_hash={"read_perm"=> "read", "create_perm"=>"create", "update_perm"=> "update", "destroy_perm"=> "delete"}
+
+      return perm_list.map{|p| perm_hash[p]}
     end
   end
 

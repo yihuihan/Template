@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get 'permission/index'
 
   devise_for :users
   resources :songs
@@ -61,7 +60,10 @@ Rails.application.routes.draw do
   #     resources :products
   #   end
 
-  resources :permission, only: [:index, :update] 
+  get 'permission' => 'permission#index'
+  put 'permission' => 'permission#update'
+  # resources :permission
+
 
   root to: 'statuses#index'
 end

@@ -2,85 +2,28 @@
     <div class="col-md-2">
     </div>
     <div class="col-md-8">
-        <h3> Edit Permission</h3> <br/>
-        <%= form_tag("permission_path", method: "put·") do %>
+        <h3> Permission List</h3> <br/>
+        <%= form_tag("/permission", method: "put") do %>
             <% User.where(is_admin: false).each do |user| %>
                 <div class="checkbox">
-                    <strong><%= user.email%></strong>
+                    <h3><%= user.email%></h3>
                     <% @entity_list.each do |entity| %>
-                        <% permissions=user.permissions_of(entity) %>
-                        <% permissions.each do |perm| %>
-                            <%= perm.inspect %>
+                        <span class="entity"><%= entity %>:</span>
+                        <% user_permissions=user.permissions_of(entity) %>
+                        <% @permission_list.each do |perm| %>
+                            <%= label_tag "perm_#{user.id}_#{entity}_#{perm}",  class: "checkbox-inline" do%>
+                            <%= check_box_tag "perm[#{user.id}][#{entity}][#{perm}]", value=true, checked=user.permissions_of(entity).include?(perm.to_s) %>
+                                <%= perm %>
+                            <% end %>
                         <% end %>
+                        <br/>
                     <% end %>
                     
                     <hr/>
                 </div>
             <% end %>
-            <div class="checkbox">
-                    <strong>test@gmail.com</strong>
-                    <label class="checkbox-inline">
-                    <input type="checkbox" id="inlineCheckbox1" value="option1"> Read
-                    </label>
-                    <label class="checkbox-inline">
-                    <input type="checkbox" id="inlineCheckbox2" value="option2"> Create
-                    </label>
-                    <label class="checkbox-inline">
-                    <input type="checkbox" id="inlineCheckbox3" value="option3"> Update
-                    </label>
-                    <label class="checkbox-inline">
-                    <input type="checkbox" id="inlineCheckbox4" value="option4"> Delete
-                    </label>
-                    
-            </div>
-                    <div class="checkbox">
-                    <strong>test@gmail.com</strong>
-                    <label class="checkbox-inline">
-                    <input type="checkbox" id="inlineCheckbox1" value="option1"> Read
-                    </label>
-                    <label class="checkbox-inline">
-                    <input type="checkbox" id="inlineCheckbox2" value="option2"> Create
-                    </label>
-                    <label class="checkbox-inline">
-                    <input type="checkbox" id="inlineCheckbox3" value="option3"> Update
-                    </label>
-                    <label class="checkbox-inline">
-                    <input type="checkbox" id="inlineCheckbox4" value="option4"> Delete
-                    </label>
-                    <hr/>
-            </div>
-                    <div class="checkbox">
-                    <strong>test@gmail.com</strong>
-                    <label class="checkbox-inline">
-                    <input type="checkbox" id="inlineCheckbox1" value="option1"> Read
-                    </label>
-                    <label class="checkbox-inline">
-                    <input type="checkbox" id="inlineCheckbox2" value="option2"> Create
-                    </label>
-                    <label class="checkbox-inline">
-                    <input type="checkbox" id="inlineCheckbox3" value="option3"> Update
-                    </label>
-                    <label class="checkbox-inline">
-                    <input type="checkbox" id="inlineCheckbox4" value="option4"> Delete
-                    </label>
-                    <hr/>
-            </div>
-                    <div class="checkbox">
-                    <strong>test@gmail.com</strong>
-                    <label class="checkbox-inline">
-                    <input type="checkbox" id="inlineCheckbox1" value="option1"> Read
-                    </label>
-                    <label class="checkbox-inline">
-                    <input type="checkbox" id="inlineCheckbox2" value="option2"> Create
-                    </label>
-                    <label class="checkbox-inline">
-                    <input type="checkbox" id="inlineCheckbox3" value="option3"> Update
-                    </label>
-                    <label class="checkbox-inline">
-                    <input type="checkbox" id="inlineCheckbox4" value="option4"> Delete
-                    </label>
-                    <hr/>
-            </div>
+
+            <%= submit_tag("Submit") %>
         <% end %>
     </div>
     <div class="col-md-2">
